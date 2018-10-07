@@ -47,7 +47,6 @@ class LinkedList:
         previous_node.next = new_node
         new_node.next = current_node
 
-
     def print_list(self):
         if self.head is None:
             print("List is Empty")
@@ -56,6 +55,32 @@ class LinkedList:
         while current_node is not None:
             print (current_node.data)
             current_node = current_node.next
+    def delete_end(self):
+        last_node = self.head
+        while last_node.next is not None:
+            prev_node = last_node
+            last_node = last_node.next
+        prev_node.next = None
+        del last_node
+
+    def delete_at(self,position):
+        if position < 0 or position >= self.length_list():
+            print("The position to be deleted is invalid")
+        else:
+            current_node = self.head
+            current_position = 0
+            while current_position != position:
+                prev_node = current_node
+                current_node = current_node.next
+                current_position += 1
+            prev_node.next = current_node.next
+            current_node.next = None
+            del current_node
+
+
+
+
+
 
 
 first_node = Node("Adam")
@@ -65,6 +90,6 @@ second_node = Node("John")
 linked_list.insert_end(second_node)
 fourth_node = Node("Neiman")
 linked_list.insert_at(fourth_node,2)
+linked_list.delete_at(3)
+
 linked_list.print_list()
-length = linked_list.length_list()
-print(length)
