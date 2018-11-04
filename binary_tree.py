@@ -79,6 +79,15 @@ class BinaryTree:
             if node.right:
                 queue.enqueue(node.right)
         return traversal
+
+    def height(self, node):
+        if node is None:
+            return -1
+        left_height = self.height(node.left)
+        right_height = self.height(node.right)
+        return 1+max(left_height, right_height)
+
+
 #Set up the tree
 tree = BinaryTree(1)
 tree.root.left = Node(2)
@@ -88,3 +97,4 @@ tree.root.left.right = Node(5)
 tree.root.right.left = Node(6)
 tree.root.right.right = Node(7)
 print(tree.print_tree("levelorder"))
+print(tree.height(tree.root))
