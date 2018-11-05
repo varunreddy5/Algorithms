@@ -41,6 +41,35 @@ class BST:
             return self._find(data, cur_node.right)
         if data == cur_node.data:
             return True
+    def inorder_print(self):
+        #Left -> Root -> Right
+        if self.root:
+            self._inorder_print(self.root)
+    def _inorder_print(self, cur_node):
+        if cur_node:
+            self._inorder_print(cur_node.left)
+            print(str(cur_node.data))
+            self._inorder_print(cur_node.right)
+
+    def is_bst_satisfied(self):
+        if self.root:
+            is_satisfied = self._is_bst_satisfied(self.root, self.root.data)
+            if is_satisfied is None:
+                return True
+            return False
+        return True
+
+    def _is_bst_satisfied(self, cur_node, data):
+        if cur_node.left:
+            if data > cur_node.left.data:
+                self._is_bst_satisfied(cur_node.left, cur_node.data)
+            else:
+                return False
+        if cur_node.right:
+            if data < cur_node.right.data:
+                self._is_bst_satisfied(cur_node.left, cur_node.data)
+            else:
+                return False
 
 bst = BST()
 bst.insert(5)
@@ -49,3 +78,4 @@ bst.insert(6)
 bst.insert(3)
 bst.insert(7)
 print(bst.find(4))
+print(bst.is_bst_satisfied())
